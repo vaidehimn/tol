@@ -91,16 +91,12 @@ session_start();
 		<section id="content">
 			<!-- MAIN -->
 			<main>
-				<div class="head-title">
-					<div class="left">
-						<h1>Dashboard</h1>	
-					</div>
-				</div>        
+				        
 				
 				<div class="table-data">
 					<div class="order">
 						<div class="head">
-							<h3>Recent Users</h3>
+							<h3>Feedback</h3>
 						</div>
 						<table>
 							<thead>

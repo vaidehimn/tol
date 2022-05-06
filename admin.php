@@ -9,6 +9,7 @@ session_start();
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Boxicons -->
 		<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 		<!-- My CSS -->
 		<link rel="stylesheet" href="css/dashboard.css">
 			<title>Tree of Life</title>
@@ -101,7 +102,26 @@ session_start();
 					<div class="order">
 						<div class="head">
 							<h3>Recent Users</h3>
+
+							<div class="card-body">
+                        <div class="row">
+                            <div class="col-md-7">
+
+                                <form action="search.php" method="POST">
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="search" required value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control" placeholder="Search data">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
 						</div>
+						
 						<table>
 							<thead>
 								<tr>

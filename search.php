@@ -1,7 +1,3 @@
-<?php
-include('dbconnect.php');
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -9,6 +5,7 @@ session_start();
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Boxicons -->
 		<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 		<!-- My CSS -->
 		<link rel="stylesheet" href="css/dashboard.css">
 			<title>Tree of Life</title>
@@ -87,45 +84,89 @@ session_start();
 			</ul>
 		</section>
 
-		<!-- CONTENT -->
-		<section id="content">
+
+        <section id="content">
 			<!-- MAIN -->
 			<main>
 				       
 				
 				<div class="table-data">
 					<div class="order">
-						<div class="head">
-							<h3>Maintenance</h3>
-						</div>
+						
 						<table>
 							<thead>
 								<tr>
-									<th>Room Number</th>
-									<th>Problem Description</th>
+									<th>Name</th>
+									<th>E-mail</th>
+									<th>Phone</th>
 								</tr>
 							</thead>
 							<tbody>
-							<?php
-		  					include('dbconnect.php');
-		 					$query="SELECT * FROM tbl_maintenance";
-							$data = mysqli_query($con,$query);
-							while($res=mysqli_fetch_assoc($data))
-							{
-							?>
-							<tr>
-								<td><?php echo $res['m_room'];?></td>
-								<td><?php echo $res['m_problem'];?></td>
-							</tr>
-							<?php
-							}
-							?>								
+                            <?php 
+                                    $con = mysqli_connect("localhost","root","","tol");
+
+                                    if(isset($_POST['search']))
+                                    {
+                                        $filtervalues = $_POST['search'];
+                                        $query = "SELECT * FROM tbl_register WHERE CONCAT(reg_name,reg_email,reg_phone) LIKE '%$filtervalues%' ";
+                                        $query_run = mysqli_query($con, $query);
+
+                                        if(mysqli_num_rows($query_run) > 0)
+                                        {
+                                            foreach($query_run as $items)
+                                            {
+                                                ?>
+                                                <tr>
+                                                    <td><?= $items['reg_name']; ?></td>
+                                                    <td><?= $items['reg_email']; ?></td>
+                                                    <td><?= $items['reg_phone']; ?></td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        }
+                                        else
+                                        {
+                                            ?>
+                                                <tr>
+                                                    <td colspan="4">No Record Found</td>
+                                                </tr>
+                                            <?php
+                                        }
+                                    }
+                                ?>						
 						   	</tbody>
 					    </table>
 					</div>
 				</div>
 			</main>
 		</section>
-	 	<script src="js/script.js"></script>
-	</body>
+
+
+
+
+
+
+
+            
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

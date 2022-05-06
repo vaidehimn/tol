@@ -86,20 +86,21 @@ if (isset($_POST["submit"]))
                     <h2 style="color: #9f8e64;">PRESCRIPTION</h2><br>
                     <form method="POST" action="makepdf.php" enctype="multipart/form-data" onsubmit="return validate();">
                         <label>Name:</label>
-                        <input type="text" id="name" name="name" placeholder="Name">
+                        <input type="text" id="name" name="name" placeholder="Name" required>
                         <span style="color: red; margin-left:50px; font-size:12px"></span><br>
                         <label>Age:</label>
-                        <input type="text" id="age" name="age" placeholder="Age">
+                        <input type="text" id="age" name="age" placeholder="Age" required>
                         <span style="color: red; margin-left:50px; font-size:12px"></span><br>
                         <label>Prescription:</label>
-                        <input type="text" id="pres" name="pres" placeholder="Prescription">
+                        <input type="text" id="pres" name="pres" placeholder="Prescription" required>
                         <span style="color: red; margin-left:50px; font-size:12px"></span><br>
                         <label>Doctor's Name:</label>
-                        <input type="text" id="dname" name="dname" placeholder="Doctor Name">
+                        <input type="text" id="dname" name="dname" placeholder="Doctor Name" required>
                         <span style="color: red; margin-left:50px; font-size:12px"></span><br>
                         <label>Doctor's Phone:</label>
-                        <input type="text" id="phone" name="phone" placeholder="Phone number">
-                        <input type="submit" name="submit" id="mysubmit" value="Submit">
+                        <input type="text" id="phone" name="phone" placeholder="Phone number" required>
+                        <span style="color: red; margin-left:50px; font-size:12px"></span><br>
+                        <input type="submit" name="submit" id="mysubmit" value="Create PDF">
                        
                         <span style="color: red; margin-left:250px; font-size:12px"></span><br>
                     </form>
@@ -117,51 +118,76 @@ function validate() {
     document.getElementById('email').value.length == 0 ||
         document.getElementById('phone').value.length == 0 || 
         document.getElementById('cpassword').value.length == 0) {
-        span[14].innerText = "Complete the registration";
-        span[14].style.color = 'red';
+        span[12].innerText = "Complete the registration";
+        span[12].style.color = 'red';
         return false;
     }
 
 }
 let name = document.getElementById('name');
 let span = document.getElementById('span');
-let email = document.getElementById('email');
-let phn = document.getElementById('phone');
-let pass1 = document.getElementById('cpassword');
+let age = document.getElementById('age');
+let pres = document.getElementById('pres');
+let dname = document.getElementById('dname');
+let phone = document.getElementById('phone');
 name.onkeyup = function() {
     var regex = /^([\.\_a-zA-Z0-9]+)([a-zA-Z0-9 ]+){1,30}$/;
     if (regex.test(name.value)) {
+        span[7].innerText = "";
+        span[7].style.color = '#28fc7a';
+        document.getElementById('mysubmit').disabled = false;
+    } else {
+        span[7].innerText = "enter a valid name";
+        span[7].style.color = 'red';
+        document.getElementById('mysubmit').disabled = true;
+    }
+}
+
+age.onkeyup = function() {
+    const regexn = /^[0-9]{2}$/;
+    if (regexn.test(phone.value)) {
+        span[8].innerText = "";
+        span[8].style.color = '#28fc7a';
+        document.getElementById('mysubmit').disabled = false;
+    } else {
+        span[8].innerText = "your age is invalid";
+        span[8].style.color = 'red';
+        document.getElementById('mysubmit').disabled = true;
+    }
+}
+pres.onkeyup = function() {
+    var regex = /^([\.\_a-zA-Z0-9]+)([a-zA-Z0-9 ]+){1,30}$/;
+    if (regex.test(pres.value)) {
+        span[9].innerText = "";
+        span[9].style.color = '#28fc7a';
+        document.getElementById('mysubmit').disabled = false;
+    } else {
+        span[9].innerText = "enter a valid name";
+        span[9].style.color = 'red';
+        document.getElementById('mysubmit').disabled = true;
+    }
+}
+dname.onkeyup = function() {
+    var regex = /^([\.\_a-zA-Z0-9]+)([a-zA-Z0-9 ]+){1,30}$/;
+    if (regex.test(dname.value)) {
+        span[10].innerText = "";
+        span[10].style.color = '#28fc7a';
+        document.getElementById('mysubmit').disabled = false;
+    } else {
+        span[10].innerText = "enter a valid name";
+        span[10].style.color = 'red';
+        document.getElementById('mysubmit').disabled = true;
+    }
+}
+phone.onkeyup = function() {
+    const regexn = /^[0-9]{10}$/;
+    if (regexn.test(phone.value)) {
         span[11].innerText = "";
         span[11].style.color = '#28fc7a';
         document.getElementById('mysubmit').disabled = false;
     } else {
-        span[11].innerText = "enter a valid name";
+        span[11].innerText = "your number is invalid";
         span[11].style.color = 'red';
-        document.getElementById('mysubmit').disabled = true;
-    }
-}
-email.onkeyup = function() {
-    const regex = /^([\.\_a-zA-Z0-9]+)@([a-zA-Z0-9]+)\.([a-zA-Z0-9]){0,10}$/;
-    const regexo = /^([\.\_a-zA-Z0-9]+)@([a-zA-Z0-9]+)\.([a-zA-Z0-9]){0,10}\.[a-zA-Z0-9]{0,10}$/;
-    if (regex.test(email.value)) {
-        span[12].innerText = "";
-        span[12].style.color = '#28fc7a';
-        document.getElementById('mysubmit').disabled = false;
-    } else {
-        span[12].innerText = "your email is invalid";
-        span[12].style.color = 'red';
-        document.getElementById('mysubmit').disabled = true;
-    }
-}
-phn.onkeyup = function() {
-    const regexn = /^[0-9]{10}$/;
-    if (regexn.test(phn.value)) {
-        span[13].innerText = "";
-        span[13].style.color = '#28fc7a';
-        document.getElementById('mysubmit').disabled = false;
-    } else {
-        span[13].innerText = "your number is invalid";
-        span[13].style.color = 'red';
         document.getElementById('mysubmit').disabled = true;
     }
 }
